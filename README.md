@@ -218,3 +218,4 @@ Tu verras des logs confirmant l'arrêt propre du serveur.
 * 2 points si vous faites des erreurs personnalisées
 
 * test DJAH
+* test push damien
