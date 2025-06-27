@@ -219,3 +219,4 @@ Tu verras des logs confirmant l'arrêt propre du serveur.
 
 * test DJAH
 * test push damien
+* test push lhukas
