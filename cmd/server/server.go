@@ -56,7 +56,7 @@ puis lance le serveur HTTP.`,
 		// TODO : Initialiser les services métiers.
 		// Créez des instances de LinkService et ClickService, en leur passant les repositories nécessaires.
 		linkService := services.NewLinkService(linkRepo)
-		clickService := services.NewClickService(clickRepo)
+		//clickService := services.NewClickService(clickRepo)
 
 		// Laissez le log
 		log.Println("Services métiers initialisés.")
@@ -66,7 +66,7 @@ puis lance le serveur HTTP.`,
 		// Passez le channel et le clickRepo aux workers.
 		bufferSize := cfg.Analytics.BufferSize
 		api.ClickEventsChannel = make(chan models.ClickEvent, bufferSize)
-		workers.StartClickWorker(api.ClickEventsChannel, clickService)
+		workers.StartClickWorkers(10, api.ClickEventsChannel, clickRepo)
 
 		// TODO : Remplacer les XXX par les bonnes variables
 		log.Printf("Channel d'événements de clic initialisé avec un buffer de %d. %d worker(s) de clics démarré(s).",

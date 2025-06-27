@@ -33,7 +33,7 @@ func clickWorker(clickEventsChan <-chan models.ClickEvent, clickRepo repository.
 		// TODO 2: Persister le clic en base de données via le 'clickRepo' (CreateClick).
 		// Implémentez ici une gestion d'erreur simple : loggez l'erreur si la persistance échoue.
 		// Pour un système en production, une logique de retry
-		err := clickRepo.CreateClick(click)
+		err := clickRepo.CreateClick(&click)
 
 		if err != nil {
 			// Si une erreur se produit lors de l'enregistrement, logguez-la.

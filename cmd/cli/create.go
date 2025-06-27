@@ -44,7 +44,7 @@ Exemple:
 		cfg := cmd2.Cfg
 
 		// TODO : Initialiser la connexion à la base de données SQLite.
-		db, err := gorm.Open(sqlite.Open(cfg.Database.DSN), &gorm.Config{})
+		db, err := gorm.Open(sqlite.Open(cfg.Database.Name), &gorm.Config{})
 		if err != nil {
 			log.Fatalf("Erreur lors de l'ouverture de la base de données : %v", err)
 		}
@@ -58,19 +58,19 @@ Exemple:
 		defer sqlDB.Close()
 
 		// TODO : Initialiser les repositories et services nécessaires NewLinkRepository & NewLinkService
-		linkRepo := sqlite.NewLinkRepository(db)
-		clickRepo := sqlite.NewClickRepository(db)
-		linkService := services.NewLinkServiceWithRepo(linkRepo, clickRepo)
+		linkRepo := repository.NewLinkRepository(db)
+		linkService := services.NewLinkService(linkRepo)
 
 		// TODO : Appeler le LinkService et la fonction CreateLink pour créer le lien court.
-		// os.Exit(1) si erreur		link, err := linkService.CreateLink(longURLFlag)
+		// os.Exit(1) si erreur
+		link, err := linkService.CreateLink(longURLFlag)
 		if err != nil {
 			log.Fatalf("Erreur lors de la création du lien : %v", err)
 		}
 
-		fullShortURL := fmt.Sprintf("%s/%s", cfg.Server.BaseURL, link.ShortCode)
+		fullShortURL := fmt.Sprintf("%s/%s", cfg.Server.BaseURL, link.Shortcode)
 		fmt.Printf("URL courte créée avec succès:\n")
-		fmt.Printf("Code: %s\n", link.ShortCode)
+		fmt.Printf("Code: %s\n", link.Shortcode)
 		fmt.Printf("URL complète: %s\n", fullShortURL)
 	},
 }

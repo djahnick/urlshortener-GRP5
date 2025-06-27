@@ -5,7 +5,6 @@ import (
 	"log"
 
 	cmd2 "github.com/axellelanca/urlshortener/cmd"
-	"github.com/axellelanca/urlshortener/internal/config"
 	"github.com/axellelanca/urlshortener/internal/models"
 	"github.com/spf13/cobra"
 	"gorm.io/driver/sqlite" // Driver SQLite pour GORM
@@ -39,7 +38,7 @@ basées sur les modèles Go.`,
 
 		// TODO 3: Exécuter les migrations automatiques de GORM.
 		// Utilisez db.AutoMigrate() et passez-lui les pointeurs vers tous vos modèles.
-		if err := models.Migrate(db); err != nil {
+		if err := db.AutoMigrate(&models.Link{}, &models.Click{}); err != nil {
 			log.Fatalf("FATAL: Échec de la migration : %v", err)
 		}
 
