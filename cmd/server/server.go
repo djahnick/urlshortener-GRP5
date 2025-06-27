@@ -66,7 +66,7 @@ puis lance le serveur HTTP.`,
 		// Passez le channel et le clickRepo aux workers.
 		bufferSize := cfg.Analytics.BufferSize
 		api.ClickEventsChannel = make(chan models.ClickEvent, bufferSize)
-		workers.StartClickWorkers(10, api.ClickEventsChannel, clickRepo)
+		workers.StartClickWorkers(cfg.Analytics.WorkerCount, api.ClickEventsChannel, clickRepo)
 
 		// TODO : Remplacer les XXX par les bonnes variables
 		log.Printf("Channel d'événements de clic initialisé avec un buffer de %d. %d worker(s) de clics démarré(s).",

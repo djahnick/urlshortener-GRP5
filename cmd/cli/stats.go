@@ -28,9 +28,11 @@ Exemple:
   url-shortener stats --code="xyz123"`,
 	Run: func(cmd *cobra.Command, args []string) {
 		// TODO : Valider que le flag --code a été fourni.
-		// os.Exit(1) si erreur		if shortCodeFlag == "" {
-		fmt.Println("Erreur : le flag --code est requis.")
-		os.Exit(1)
+		// os.Exit(1) si erreur
+		if shortCodeFlag == "" {
+			fmt.Println("Erreur : le flag --code est requis.")
+			os.Exit(1)
+		}
 
 		// TODO : Charger la configuration chargée globalement via cmd.cfg
 		cfg := cmd2.Cfg
@@ -65,6 +67,12 @@ Exemple:
 			} else {
 				fmt.Println("Erreur récupération stats :", err)
 			}
+			os.Exit(1)
+		}
+
+		// Ajouter un check ici !
+		if link == nil {
+			fmt.Println("Erreur : le lien est introuvable.")
 			os.Exit(1)
 		}
 
