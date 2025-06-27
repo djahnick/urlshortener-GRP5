@@ -33,6 +33,7 @@ basées sur les modèles Go.`,
 		if err != nil {
 			log.Fatalf("FATAL: Échec de l'obtention de la base de données SQL sous-jacente: %v", err)
 		}
+
 		// TODO Assurez-vous que la connexion est fermée après la migration.
 		defer sqlDB.Close()
 
